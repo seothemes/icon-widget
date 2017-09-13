@@ -73,6 +73,9 @@ class Icon_Widget extends WP_Widget {
 			)
 		);
 
+		// Add settings link.
+		add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array( $this, 'action_links' ) );
+
 		// Register admin styles and scripts.
 		add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
@@ -93,6 +96,23 @@ class Icon_Widget extends WP_Widget {
 	public function get_widget_slug() {
 
 		return $this->widget_slug;
+
+	}
+
+	/**
+	 * Add settings link.
+	 *
+	 * @param  array $links Plugin links.
+	 *
+	 * @return array
+	 */
+	public function action_links( $links ) {
+
+		$settings_link = array(
+		'<a href="' . admin_url( 'options-general.php?page=icon_widget' ) . '">Settings</a>',
+		);
+
+		return array_merge( $links, $settings_link );
 
 	}
 
