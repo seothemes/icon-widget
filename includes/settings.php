@@ -37,9 +37,9 @@ function icon_widget_settings_init() {
 	);
 
 	add_settings_field(
-		'icon_widget_select_field_2',
+		'font',
 		__( 'Icon font', 'icon-widget' ),
-		'icon_widget_select_field_2_render',
+		'font_render',
 		'icon_widget_setting',
 		'icon_widget_section'
 	);
@@ -116,13 +116,16 @@ function icon_widget_radio_field_1_render() {
  *
  * @return void
  */
-function icon_widget_select_field_2_render() {
+function font_render() {
 
-	$options = get_option( 'icon_widget_settings' );
+	$options  = get_option( 'icon_widget_settings' );
+	$selected = $options['font'] ? $options['font'] : 'font-awesome';
+
 	?>
-	<select name='icon_widget_settings[icon_widget_select_field_2]'>
-		<option value='1' <?php selected( $options['icon_widget_select_field_2'], 1 ); ?>>Fontawesome</option>
-		<option value='2' <?php selected( $options['icon_widget_select_field_2'], 2 ); ?>>Lineawesome</option>
+	<select name='icon_widget_settings[font]'>
+		<option value='font-awesome' <?php selected( $selected, 'font-awesome' ); ?>><?php esc_html_e( 'Font Awesome', 'icon-widget' ); ?></option>
+		<option value='line-awesome' <?php selected( $selected, 'line-awesome' ); ?>><?php esc_html_e( 'Line Awesome', 'icon-widget' ); ?></option>
+		<option value='ionicons' <?php selected( $selected, 'ionicons' ); ?>><?php esc_html_e( 'Ionicons', 'icon-widget' ); ?></option>
 	</select>
 
 <?php

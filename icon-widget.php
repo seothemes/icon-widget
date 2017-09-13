@@ -15,7 +15,7 @@
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://seothemes.com
  * Description:       Displays a Fontawesome icon with a title and description
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com
  * Text Domain:       icon-widget
@@ -251,11 +251,27 @@ class Icon_Widget extends WP_Widget {
 
 		wp_enqueue_style( $this->get_widget_slug() . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array( 'wp-color-picker' ) );
 
-		wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ), array( $this->get_widget_slug() . '-admin-styles' ) );
-
-		wp_enqueue_style( 'bootstrap', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ), array( 'font-awesome' ) );
+		wp_enqueue_style( 'bootstrap', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ), array( $this->get_widget_slug() . '-admin-styles' ) );
 
 		wp_enqueue_style( 'bootstrap-select', plugins_url( 'assets/css/bootstrap-select.min.css', __FILE__ ), array( 'bootstrap' ) );
+
+		// Icon font.
+		$settings = get_option( 'icon_widget_settings' );
+		$font     = $settings['font'];
+
+		if ( 'font-awesome' === $font ) {
+
+			wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
+
+		} elseif ( 'line-awesome' === $font ) {
+
+			wp_enqueue_style( 'line-awesome', plugins_url( 'assets/css/line-awesome.min.css', __FILE__ ) );
+
+		} elseif ( 'ionicons' === $font ) {
+
+			wp_enqueue_style( 'ionicons', plugins_url( 'assets/css/ionicons.min.css', __FILE__ ) );
+
+		}
 
 	}
 
@@ -280,15 +296,19 @@ class Icon_Widget extends WP_Widget {
 		// wp_enqueue_style( $this->get_widget_slug() . '-widget-styles', plugins_url( 'assets/css/widget.css', __FILE__ ) );
 
 		$settings = get_option( 'icon_widget_settings' );
-		$font     = $settings['icon_widget_select_field_2'];
+		$font     = $settings['font'];
 
-		if ( '2' === $font ) {
+		if ( 'font-awesome' === $font ) {
+
+			wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
+
+		} elseif ( 'line-awesome' === $font ) {
 
 			wp_enqueue_style( 'line-awesome', plugins_url( 'assets/css/line-awesome.min.css', __FILE__ ) );
 
-		} else {
+		} elseif ( 'ionicons' === $font ) {
 
-			wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
+			wp_enqueue_style( 'ionicons', plugins_url( 'assets/css/ionicons.min.css', __FILE__ ) );
 
 		}
 

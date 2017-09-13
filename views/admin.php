@@ -26,10 +26,13 @@
 	</p>
 
 	<?php
-	// Load the array of icon glyphs.
-	include( plugin_dir_path( __DIR__ ) . 'includes/fontawesome.php' );
 
-	$selected_icon = $instance['icon'];
+	$settings = get_option( 'icon_widget_settings' );
+	$font     = $settings['font'];
+
+	// Load the array of icon glyphs.
+	include( plugin_dir_path( __DIR__ ) . 'includes/' . $font . '.php' );
+
 	?>
 
 	<script type="text/javascript">
@@ -49,7 +52,7 @@
 			
 			<?php foreach ( $icons as $icon ) : ?>
 
-			<option data-icon='<?php echo esc_attr( $icon ); ?>' value="<?php echo esc_attr( $icon ); ?>" <?php echo ( $selected_icon === $icon ) ? 'selected' : ''; ?>><?php echo esc_html( $icon ); ?></option>
+			<option data-icon='<?php echo esc_attr( $icon ); ?>' value="<?php echo esc_attr( $icon ); ?>" <?php echo ( $instance['icon'] === $icon ) ? 'selected' : ''; ?>><?php echo esc_html( str_replace( array( '-', 'fa ', 'ion ' ), array( ' ', '', '' ), $icon ) ); ?></option>
 
 			<?php endforeach; ?>
 
