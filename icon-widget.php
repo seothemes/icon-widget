@@ -259,7 +259,18 @@ class Icon_Widget extends WP_Widget {
 
 		// wp_enqueue_style( $this->get_widget_slug() . '-widget-styles', plugins_url( 'assets/css/widget.css', __FILE__ ) );
 
-		wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
+		$settings = get_option( 'icon_widget_settings' );
+		$font     = $settings['icon_widget_select_field_2'];
+
+		if ( '2' === $font ) {
+
+			wp_enqueue_style( 'line-awesome', plugins_url( 'assets/css/line-awesome.min.css', __FILE__ ) );
+
+		} else {
+
+			wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
+
+		}
 
 	}
 
@@ -273,6 +284,9 @@ class Icon_Widget extends WP_Widget {
 	}
 
 }
+
+// Register settings.
+include( plugin_dir_path( __FILE__ ) . 'includes/settings.php' );
 
 // Register widget.
 add_action( 'widgets_init', create_function( '', 'register_widget("Icon_Widget");' ) );
