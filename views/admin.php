@@ -34,7 +34,7 @@
 
 	<script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
-			$( '.selectpicker' ).selectpicker( {
+			$( '#widgets-right .select-picker' ).selectpicker( {
 				iconBase: 'fa',
 				dropupAuto: false
 			} );
@@ -45,7 +45,7 @@
 			<?php esc_html_e( 'Icon:', 'icon-widget' ); ?>
 		</label>
 		<br/>
-		<select class='selectpicker widefat' id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" data-live-search="true">
+		<select class='select-picker widefat' id="<?php echo esc_attr( $this->get_field_id( 'icon' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'icon' ) ); ?>" data-live-search="true">
 			
 			<?php foreach ( $icons as $icon ) : ?>
 
@@ -104,7 +104,7 @@
 
 	<script type="text/javascript">
 		jQuery( document ).ready( function( $ ) {
-			$( '.color-picker' ).wpColorPicker();
+			$( '#widgets-right .color-picker' ).wpColorPicker();
 		} );
 	</script>
 	<p>
