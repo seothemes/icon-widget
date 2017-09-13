@@ -1,5 +1,5 @@
 === Icon Widget ===
-Contributors: SEO Themes
+Contributors: seothemes
 Tags: icon, widget
 Donate link: https://seothemes.com
 Requires at least: 4.8.1

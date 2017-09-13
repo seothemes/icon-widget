@@ -68,7 +68,7 @@ class Icon_Widget extends WP_Widget {
 			$this->get_widget_slug(),
 			__( 'Icon', 'icon-widget' ),
 			array(
-				'classname'   => $this->get_widget_slug() . '-class',
+				'classname'   => 'icon_widget',
 				'description' => __( 'Displays an icon with a title and description.', 'icon-widget' ),
 			)
 		);
@@ -80,11 +80,6 @@ class Icon_Widget extends WP_Widget {
 		// Register site styles and scripts.
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_scripts' ) );
-
-		// Refreshing the widget's cached output with each new post.
-		add_action( 'save_post',    array( $this, 'flush_widget_cache' ) );
-		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
-		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
 
 	}
 
@@ -115,53 +110,27 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function widget( $args, $instance ) {
 
-		// Check if there is a cached output.
-		$cache = wp_cache_get( $this->get_widget_slug(), 'widget' );
-
-		if ( ! is_array( $cache ) ) {
-
-			$cache = array();
-
-		}
-
 		if ( ! isset( $args['widget_id'] ) ) {
 
 			$args['widget_id'] = $this->id;
 
 		}
 
-		if ( isset( $cache[ $args['widget_id'] ] ) ) {
+		echo $args['before_widget'];
 
-			return print $cache[ $args['widget_id'] ];
+		printf( '<div class="icon-widget" style="text-align: %s">', esc_attr( $instance['align'] ) );
 
-		}
+		printf( '<i class="fa %1$s fa-%2$s" style="color: %3$s"></i>', esc_attr( $instance['icon'] ), esc_attr( $instance['size'] ), esc_attr( $instance['color'] ) );
 
-		// Go on with your widget logic, put everything into a string.
-		extract( $args, EXTR_SKIP );
+		echo apply_filters( 'icon_widget_line_break', true ) ? '<br>' : '';
 
-		$widget_string = $before_widget;
+		echo $args['before_title'] . esc_html( $instance['title'] ) . $args['after_title'];
 
-		ob_start();
-		include( plugin_dir_path( __FILE__ ) . 'views/widget.php' );
-		$widget_string .= ob_get_clean();
-		$widget_string .= $after_widget;
+		echo apply_filters( 'icon_widget_wpautop', true ) ? wp_kses_post( wpautop( $instance['content'] ) ) : wp_kses_post( $instance['content'] );
 
-		$cache[ $args['widget_id'] ] = $widget_string;
+		echo '</div>';
 
-		wp_cache_set( $this->get_widget_slug(), $cache, 'widget' );
-
-		print $widget_string;
-
-	}
-
-	/**
-	 * Flush widget cache.
-	 *
-	 * @return void
-	 */
-	public function flush_widget_cache() {
-
-		wp_cache_delete( $this->get_widget_slug(), 'widget' );
+		echo $args['after_widget'];
 
 	}
 
@@ -303,7 +272,7 @@ class Icon_Widget extends WP_Widget {
 
 	}
 
-} // end class
+}
 
 // Register widget.
 add_action( 'widgets_init', create_function( '', 'register_widget("Icon_Widget");' ) );
