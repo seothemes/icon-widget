@@ -15,7 +15,7 @@
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://seothemes.com
  * Description:       Displays a Fontawesome icon with a title and description
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com
  * Text Domain:       icon-widget
@@ -189,10 +189,10 @@ class Icon_Widget extends WP_Widget {
 			array(
 				'title'   => '',
 				'content' => '',
-				'icon'    => '\f000',
-				'size'    => 'lg',
-				'align'   => 'left',
-				'color'   => '#333333',
+				'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
+				'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
+				'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
+				'color'   => apply_filters( 'icon_widget_default_color', '#333333' ),
 			)
 		);
 
@@ -235,11 +235,8 @@ class Icon_Widget extends WP_Widget {
 		if ( ! get_option( 'icon_widget_settings' ) ) {
 
 			$defaults = array(
-				'font' => 'font-awesome',
+				'font' => apply_filters( 'icon_widget_default_font', 'font-awesome' ),
 			);
-
-			// Allow developers to override defaults.
-			$defaults = apply_filters( 'icon_widget_defaults', $defaults );
 
 			add_option( 'icon_widget_settings', $defaults );
 
