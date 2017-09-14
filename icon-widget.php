@@ -231,7 +231,20 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public static function activate( $network_wide ) {
 
-		// TODO define activation functionality here.
+		// Add default icon font.
+		if ( ! get_option( 'icon_widget_settings' ) ) {
+
+			$defaults = array(
+				'font' => 'font-awesome',
+			);
+
+			// Allow developers to override defaults.
+			$defaults = apply_filters( 'icon_widget_defaults', $defaults );
+
+			add_option( 'icon_widget_settings', $defaults );
+
+		}
+
 	}
 
 	/**
@@ -241,7 +254,9 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public static function deactivate( $network_wide ) {
 
-		// TODO define deactivation functionality here.
+		// Clean up.
+		delete_option( 'icon_widget_settings' );
+
 	}
 
 	/**
