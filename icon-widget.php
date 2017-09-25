@@ -15,7 +15,7 @@
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://seothemes.com
  * Description:       Displays a Fontawesome icon with a title and description
- * Version:           1.0.4
+ * Version:           1.0.5
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com
  * Text Domain:       icon-widget
@@ -261,6 +261,12 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function register_admin_styles() {
 
+		if ( get_current_screen()->id !== 'widgets' ) {
+
+			return;
+
+		}
+
 		wp_enqueue_style( $this->get_widget_slug() . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array( 'wp-color-picker' ) );
 
 		wp_enqueue_style( 'bootstrap', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ), array( $this->get_widget_slug() . '-admin-styles' ) );
@@ -291,6 +297,12 @@ class Icon_Widget extends WP_Widget {
 	 * Registers and enqueues admin-specific JavaScript.
 	 */
 	public function register_admin_scripts() {
+
+		if ( get_current_screen()->id !== 'widgets' ) {
+
+			return;
+
+		}
 
 		wp_enqueue_script( $this->get_widget_slug() . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ) );
 
