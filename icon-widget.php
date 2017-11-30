@@ -15,7 +15,7 @@
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://seothemes.com
  * Description:       Displays a Fontawesome icon with a title and description
- * Version:           1.0.5
+ * Version:           1.0.7
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com
  * Text Domain:       icon-widget
@@ -82,7 +82,6 @@ class Icon_Widget extends WP_Widget {
 
 		// Register site styles and scripts.
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_styles' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_scripts' ) );
 
 	}
 
@@ -159,6 +158,8 @@ class Icon_Widget extends WP_Widget {
 	 *
 	 * @param array $new_instance The new instance of values to be generated via the update.
 	 * @param array $old_instance The previous instance of values before the update.
+	 *
+	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
 
@@ -261,15 +262,13 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function register_admin_styles() {
 
-		if ( get_current_screen()->id !== 'widgets' ) {
+		if ( ! is_customize_preview() && get_current_screen()->id !== 'widgets' ) {
 
 			return;
 
 		}
 
-		wp_enqueue_style( $this->get_widget_slug() . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array( 'wp-color-picker' ) );
-
-		wp_enqueue_style( 'bootstrap', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ), array( $this->get_widget_slug() . '-admin-styles' ) );
+		wp_enqueue_style( 'bootstrap', plugins_url( 'assets/css/bootstrap.min.css', __FILE__ ), array( 'wp-color-picker' ) );
 
 		wp_enqueue_style( 'bootstrap-select', plugins_url( 'assets/css/bootstrap-select.min.css', __FILE__ ), array( 'bootstrap' ) );
 
@@ -289,6 +288,10 @@ class Icon_Widget extends WP_Widget {
 
 			wp_enqueue_style( 'ionicons', plugins_url( 'assets/css/ionicons.min.css', __FILE__ ) );
 
+		} elseif ( 'streamline' === $font ) {
+
+			wp_enqueue_style( 'streamline', plugins_url( 'assets/css/streamline.min.css', __FILE__ ) );
+
 		}
 
 	}
@@ -298,15 +301,13 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function register_admin_scripts() {
 
-		if ( get_current_screen()->id !== 'widgets' ) {
+		if ( ! is_customize_preview() && get_current_screen()->id !== 'widgets' ) {
 
 			return;
 
 		}
 
-		wp_enqueue_script( $this->get_widget_slug() . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ) );
-
-		wp_enqueue_script( 'bootstrap', plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array( $this->get_widget_slug() . '-admin-script' ) );
+		wp_enqueue_script( 'bootstrap', plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ) );
 
 		wp_enqueue_script( 'bootstrap-select', plugins_url( 'assets/js/bootstrap-select.min.js', __FILE__ ), array( 'bootstrap' ) );
 
@@ -316,8 +317,6 @@ class Icon_Widget extends WP_Widget {
 	 * Registers and enqueues widget-specific styles.
 	 */
 	public function register_widget_styles() {
-
-		// wp_enqueue_style( $this->get_widget_slug() . '-widget-styles', plugins_url( 'assets/css/widget.css', __FILE__ ) );
 
 		$settings = get_option( 'icon_widget_settings' );
 		$font     = $settings['font'];
@@ -334,16 +333,11 @@ class Icon_Widget extends WP_Widget {
 
 			wp_enqueue_style( 'ionicons', plugins_url( 'assets/css/ionicons.min.css', __FILE__ ) );
 
+		} elseif ( 'streamline' === $font ) {
+
+			wp_enqueue_style( 'streamline', plugins_url( 'assets/css/streamline.min.css', __FILE__ ) );
+
 		}
-
-	}
-
-	/**
-	 * Registers and enqueues widget-specific scripts.
-	 */
-	public function register_widget_scripts() {
-
-		// wp_enqueue_script( $this->get_widget_slug() . '-script', plugins_url( 'assets/js/widget.js', __FILE__ ), array( 'jquery' ) );
 
 	}
 
@@ -351,6 +345,9 @@ class Icon_Widget extends WP_Widget {
 
 // Register settings.
 include( plugin_dir_path( __FILE__ ) . 'includes/settings.php' );
+
+// Add shortcode.
+include( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
 
 // Register widget.
 add_action( 'widgets_init', create_function( '', 'register_widget("Icon_Widget");' ) );

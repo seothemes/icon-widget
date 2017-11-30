@@ -1,12 +1,12 @@
 # Icon Widget
 
-Displays a Fontawesome icon with a title and description
+Displays an icon with a title and description
 
 - Contributors: SEO Themes
 - Tags: icon, widget
 - Donate link: https://seothemes.com
 - Requires at least: 4.8.1
-- Tested up to: 4.8.1
+- Tested up to: 4.9
 - Requires PHP: 5.6
 - Stable tag: 1.0.0
 - License: GPL-2.0+
@@ -14,7 +14,7 @@ Displays a Fontawesome icon with a title and description
 
 ## Description
 
-Icon Widget creates a new WordPress widget that displays a Fontawesome icon, title and description. Select the size, color and text-alignment with easy to use dropdown options.
+Icon Widget creates a new WordPress widget that displays an icon, title and description. Select the size, color and text-alignment with easy to use dropdown options.
 
 ## Installation
 

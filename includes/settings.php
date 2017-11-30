@@ -5,6 +5,13 @@
  * @package Icon_Widget
  */
 
+// Prevent direct file access.
+if ( ! defined( 'ABSPATH' ) ) {
+
+	exit;
+
+}
+
 // Register settings.
 add_action( 'admin_menu', 'icon_widget_add_admin_menu' );
 add_action( 'admin_init', 'icon_widget_settings_init' );
@@ -44,71 +51,6 @@ function icon_widget_settings_init() {
 		'icon_widget_section'
 	);
 
-	/*
-	add_settings_field(
-		'icon_widget_checkbox_field_0',
-		__( 'Load CSS', 'icon-widget' ),
-		'icon_widget_checkbox_field_0_render',
-		'icon_widget_setting',
-		'icon_widget_section'
-	);
-
-	add_settings_field(
-		'icon_widget_radio_field_1',
-		__( 'Icon position', 'icon-widget' ),
-		'icon_widget_radio_field_1_render',
-		'icon_widget_setting',
-		'icon_widget_section'
-	);
-
-	add_settings_field(
-		'icon_widget_text_field_3',
-		__( 'Settings field description', 'icon-widget' ),
-		'icon_widget_text_field_3_render',
-		'icon_widget_setting',
-		'icon_widget_section'
-	);
-
-	add_settings_field(
-		'icon_widget_textarea_field_4',
-		__( 'Settings field description', 'icon-widget' ),
-		'icon_widget_textarea_field_4_render',
-		'icon_widget_setting',
-		'icon_widget_section'
-	);
-	*/
-
-}
-
-/**
- * Render checkbox.
- *
- * @return void
- */
-function icon_widget_checkbox_field_0_render() {
-
-	$options = get_option( 'icon_widget_settings' );
-	?>
-	<input type='checkbox' name='icon_widget_settings[icon_widget_checkbox_field_0]' <?php checked( $options['icon_widget_checkbox_field_0'], 1 ); ?> value='1'>
-	<?php
-
-}
-
-/**
- * Render radio.
- *
- * @return void
- */
-function icon_widget_radio_field_1_render() {
-
-	$options = get_option( 'icon_widget_settings' );
-	?>
-	<input type='radio' name='icon_widget_settings[icon_widget_radio_field_1]' <?php checked( $options['icon_widget_radio_field_1'], 0 ); ?> value='0' id="false">
-	<label for="false">Before title &nbsp;</label>
-	<input type='radio' name='icon_widget_settings[icon_widget_radio_field_1]' <?php checked( $options['icon_widget_radio_field_1'], 1 ); ?> value='1' id="true">
-	<label for="true">After title</label>
-	<?php
-
 }
 
 /**
@@ -126,39 +68,10 @@ function font_render() {
 		<option value='font-awesome' <?php selected( $selected, 'font-awesome' ); ?>><?php esc_html_e( 'Font Awesome', 'icon-widget' ); ?></option>
 		<option value='line-awesome' <?php selected( $selected, 'line-awesome' ); ?>><?php esc_html_e( 'Line Awesome', 'icon-widget' ); ?></option>
 		<option value='ionicons' <?php selected( $selected, 'ionicons' ); ?>><?php esc_html_e( 'Ionicons', 'icon-widget' ); ?></option>
+		<option value='streamline' <?php selected( $selected, 'streamline' ); ?>><?php esc_html_e( 'Streamline', 'icon-widget' ); ?></option>
 	</select>
 
 <?php
-
-}
-
-/**
- * Render text field.
- *
- * @return void
- */
-function icon_widget_text_field_3_render() {
-
-	$options = get_option( 'icon_widget_settings' );
-	?>
-	<input type='text' name='icon_widget_settings[icon_widget_text_field_3]' value='<?php echo $options['icon_widget_text_field_3']; ?>'>
-	<?php
-
-}
-
-/**
- * Render textarea.
- *
- * @return void
- */
-function icon_widget_textarea_field_4_render() {
-
-	$options = get_option( 'icon_widget_settings' );
-	?>
-	<textarea cols='40' rows='5' name='icon_widget_settings[icon_widget_textarea_field_4]'> 
-		<?php echo $options['icon_widget_textarea_field_4']; ?>
- 	</textarea>
-	<?php
 
 }
 
