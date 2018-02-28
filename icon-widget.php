@@ -15,7 +15,7 @@
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://seothemes.com
  * Description:       Displays a Fontawesome icon with a title and description
- * Version:           1.0.7
+ * Version:           1.0.8
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com
  * Text Domain:       icon-widget
@@ -343,14 +343,27 @@ class Icon_Widget extends WP_Widget {
 
 }
 
+add_action( 'widgets_init', 'icon_widget_register_widget' );
+/**
+ * Register widget
+ *
+ * Registers the Icon Widget widget with WordPress.
+ *
+ * @since  1.0.8
+ *
+ * @return void
+ */
+function icon_widget_register_widget() {
+
+	register_widget( 'Icon_Widget' );
+
+}
+
 // Register settings.
 include( plugin_dir_path( __FILE__ ) . 'includes/settings.php' );
 
 // Add shortcode.
 include( plugin_dir_path( __FILE__ ) . 'includes/shortcode.php' );
-
-// Register widget.
-add_action( 'widgets_init', create_function( '', 'register_widget("Icon_Widget");' ) );
 
 // Hooks fired when the Widget is activated and deactivated.
 register_activation_hook( __FILE__, array( 'Icon_Widget', 'activate' ) );

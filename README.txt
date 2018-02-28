@@ -57,6 +57,9 @@ Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
 
+= 1.0.8 =
+* Fixed deprecated create_function in PHP7.2
+
 = 1.0.7 =
 * Added `icon_widget` shortcode.
 * Added conditional exit to settings file.
