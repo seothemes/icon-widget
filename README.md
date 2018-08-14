@@ -7,8 +7,8 @@ Displays an icon with a title and description
 - Donate link: https://seothemes.com
 - Requires at least: 4.8.1
 - Tested up to: 4.9
-- Requires PHP: 5.6
-- Stable tag: 1.0.0
+- Requires PHP: 5.3
+- Stable tag: 1.0.9
 - License: GPL-2.0+
 - License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 

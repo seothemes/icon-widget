@@ -4,8 +4,8 @@ Tags: icon, widget
 Donate link: https://seothemes.com
 Requires at least: 4.8.1
 Tested up to: 4.9.1
-Requires PHP: 5.6
-Stable tag: 1.0.6
+Requires PHP: 5.4
+Stable tag: 1.0.9
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
@@ -31,12 +31,16 @@ Since 1.0.6 you can now use the `icon_widget` shortcode. Below is a list of avai
 * size     =>  '2x'
 * align    =>  'center'
 * color    =>  '#333333'
+* bg       =>  ''
+* padding  =>  ''
+* radius   =>  ''
 * heading  =>  'h4'
 * break    =>  '`<br>`'
 
+
 Here is an example of the icon widget shortcode using all available parameters:
 
-`[icon_widget classes="icon-widget" title="Icon Widget" content="Add a short description" icon="fa-star" size="2x" align="center" color="#333333" heading="h4" break="<br>"]`
+`[icon_widget classes="icon-widget" title="Icon Widget" content="Add a short description" icon="fa-star" size="2x" align="center" color="#fff" bg="#333" padding="30" radius="30" heading="h4" break="<br>"]`
 
 == Installation ==
 1. Go to Plugins > Add New.
@@ -56,6 +60,9 @@ The icon font can be changed from **Settings > Icon Widget**.
 Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
+
+= 1.0.9 =
+* Add background color, padding and border radius options.
 
 = 1.0.8 =
 * Fixed deprecated create_function in PHP7.2

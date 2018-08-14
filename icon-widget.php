@@ -74,7 +74,10 @@ class Icon_Widget extends WP_Widget {
 		);
 
 		// Add settings link.
-		add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), array( $this, 'action_links' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array(
+			$this,
+			'action_links'
+		) );
 
 		// Register admin styles and scripts.
 		add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
@@ -108,7 +111,7 @@ class Icon_Widget extends WP_Widget {
 	public function action_links( $links ) {
 
 		$settings_link = array(
-		'<a href="' . admin_url( 'options-general.php?page=icon_widget' ) . '">Settings</a>',
+			'<a href="' . admin_url( 'options-general.php?page=icon_widget' ) . '">Settings</a>',
 		);
 
 		return array_merge( $links, $settings_link );
@@ -124,7 +127,7 @@ class Icon_Widget extends WP_Widget {
 	/**
 	 * Outputs the content of the widget.
 	 *
-	 * @param array $args  The array of form elements.
+	 * @param array $args     The array of form elements.
 	 * @param array $instance The current instance of the widget.
 	 */
 	public function widget( $args, $instance ) {
@@ -139,7 +142,7 @@ class Icon_Widget extends WP_Widget {
 
 		printf( '<div class="icon-widget" style="text-align: %s">', esc_attr( $instance['align'] ) );
 
-		printf( '<i class="fa %1$s fa-%2$s" style="color: %3$s"></i>', esc_attr( $instance['icon'] ), esc_attr( $instance['size'] ), esc_attr( $instance['color'] ) );
+		printf( '<i class="fa %1$s fa-%2$s" style="color:%3$s;background-color:%4$s;padding:%5$spx;border-radius:%6$spx;"></i>', esc_attr( $instance['icon'] ), esc_attr( $instance['size'] ), esc_attr( $instance['color'] ), esc_attr( $instance['bg'] ), esc_attr( $instance['padding'] ), esc_attr( $instance['radius'] ) );
 
 		echo apply_filters( 'icon_widget_line_break', true ) ? '<br>' : '';
 
@@ -156,7 +159,8 @@ class Icon_Widget extends WP_Widget {
 	/**
 	 * Process the widget's options to be saved.
 	 *
-	 * @param array $new_instance The new instance of values to be generated via the update.
+	 * @param array $new_instance The new instance of values to be generated via the
+	 *                            update.
 	 * @param array $old_instance The previous instance of values before the update.
 	 *
 	 * @return array
@@ -172,6 +176,9 @@ class Icon_Widget extends WP_Widget {
 		$instance['size']    = sanitize_html_class( $new_instance['size'] );
 		$instance['align']   = sanitize_html_class( $new_instance['align'] );
 		$instance['color']   = sanitize_hex_color( $new_instance['color'] );
+		$instance['bg']      = sanitize_hex_color( $new_instance['bg'] );
+		$instance['padding'] = intval( $new_instance['padding'] );
+		$instance['radius']  = intval( $new_instance['radius'] );
 
 		return $instance;
 
@@ -184,18 +191,21 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 
+		$defaults = apply_filters( 'icon_widget_defaults', array(
+			'title'   => '',
+			'content' => '',
+			// Keep sub filters for backwards compat.
+			'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
+			'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
+			'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
+			'color'   => apply_filters( 'icon_widget_default_color', '#333333' ),
+			'bg'      => '',
+			'padding' => '',
+			'radius'  => '',
+		) );
+
 		// Define default values for your variables.
-		$instance = wp_parse_args(
-			(array) $instance,
-			array(
-				'title'   => '',
-				'content' => '',
-				'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
-				'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
-				'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
-				'color'   => apply_filters( 'icon_widget_default_color', '#333333' ),
-			)
-		);
+		$instance = wp_parse_args( (array) $instance, $defaults );
 
 		// Store the values of the widget in their own variable.
 		$title   = $instance['title'];
@@ -204,6 +214,9 @@ class Icon_Widget extends WP_Widget {
 		$size    = $instance['size'];
 		$align   = $instance['align'];
 		$color   = $instance['color'];
+		$bg      = $instance['bg'];
+		$padding = $instance['padding'];
+		$radius  = $instance['radius'];
 
 		// Display the admin form.
 		include( plugin_dir_path( __FILE__ ) . 'views/admin.php' );
@@ -228,16 +241,18 @@ class Icon_Widget extends WP_Widget {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @param  boolean $network_wide True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
+	 * @param  boolean $network_wide True if WPMU superadmin uses "Network Activate"
+	 *                               action, false if WPMU is disabled or plugin is
+	 *                               activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
 
 		// Add default icon font.
 		if ( ! get_option( 'icon_widget_settings' ) ) {
 
-			$defaults = array(
+			$defaults = apply_filters( 'icon_widget_defaults', array(
 				'font' => apply_filters( 'icon_widget_default_font', 'font-awesome' ),
-			);
+			) );
 
 			add_option( 'icon_widget_settings', $defaults );
 
@@ -248,7 +263,9 @@ class Icon_Widget extends WP_Widget {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @param boolean $network_wide True if WPMU superadmin uses "Network Activate"action, false if WPMU is disabled or plugin is activated on an individual blog.
+	 * @param boolean $network_wide True if WPMU superadmin uses "Network
+	 *                              Activate"action, false if WPMU is disabled or plugin
+	 *                              is activated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
 
@@ -307,7 +324,10 @@ class Icon_Widget extends WP_Widget {
 
 		}
 
-		wp_enqueue_script( 'bootstrap', plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array( 'jquery', 'wp-color-picker' ) );
+		wp_enqueue_script( 'bootstrap', plugins_url( 'assets/js/bootstrap.min.js', __FILE__ ), array(
+			'jquery',
+			'wp-color-picker'
+		) );
 
 		wp_enqueue_script( 'bootstrap-select', plugins_url( 'assets/js/bootstrap-select.min.js', __FILE__ ), array( 'bootstrap' ) );
 
