@@ -31,6 +31,17 @@
                   value="<?php echo esc_attr( $this->get_field_name( 'content' ) ); ?>"><?php echo esc_textarea( $content ); ?></textarea>
     </p>
 
+    <p>
+        <label for="<?php echo esc_attr( $this->get_field_id( 'url' ) ); ?>">
+            <?php esc_html_e( 'Url:', 'icon-widget' ); ?>
+        </label>
+        <br />
+        <input type="text" class='widefat'
+               id="<?php echo esc_attr( $this->get_field_id( 'url' ) ); ?>"
+               name="<?php echo esc_attr( $this->get_field_name( 'url' ) ); ?>"
+               value="<?php echo esc_attr( $url ); ?>">
+    </p>
+
 	<?php
 
 	$settings = get_option( 'icon_widget_settings' );

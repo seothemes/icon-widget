@@ -153,6 +153,8 @@ class Icon_Widget extends WP_Widget {
 
 		echo $args['before_widget'];
 
+		printf( '<a href="%s">', esc_attr( $instance['url'] ));
+
 		printf( '<div class="icon-widget" style="text-align: %s">', esc_attr( $instance['align'] ) );
 
 		printf( '<i class="fa %1$s fa-%2$s" style="color:%3$s;background-color:%4$s;padding:%5$spx;border-radius:%6$spx;"></i>', esc_attr( $instance['icon'] ), esc_attr( $instance['size'] ), esc_attr( $instance['color'] ), esc_attr( $instance['bg'] ), esc_attr( $instance['padding'] ), esc_attr( $instance['radius'] ) );
@@ -163,7 +165,7 @@ class Icon_Widget extends WP_Widget {
 
 		echo apply_filters( 'icon_widget_wpautop', true ) ? wp_kses_post( wpautop( $instance['content'] ) ) : wp_kses_post( $instance['content'] );
 
-		echo '</div>';
+		echo '</div></a>';
 
 		echo $args['after_widget'];
 
@@ -185,6 +187,7 @@ class Icon_Widget extends WP_Widget {
 		// Update widget's old values with new incoming values.
 		$instance['title']   = sanitize_text_field( $new_instance['title'] );
 		$instance['content'] = wp_kses_post( $new_instance['content'] );
+		$instance['url'] 	 = strip_tags( $new_instance['url'] );
 		$instance['icon']    = sanitize_html_class( $new_instance['icon'] );
 		$instance['size']    = sanitize_html_class( $new_instance['size'] );
 		$instance['align']   = sanitize_html_class( $new_instance['align'] );
@@ -207,6 +210,7 @@ class Icon_Widget extends WP_Widget {
 		$defaults = apply_filters( 'icon_widget_defaults', array(
 			'title'   => '',
 			'content' => '',
+			'url' => '#',
 			// Keep sub filters for backwards compat.
 			'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
 			'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
@@ -223,6 +227,7 @@ class Icon_Widget extends WP_Widget {
 		// Store the values of the widget in their own variable.
 		$title   = $instance['title'];
 		$content = $instance['content'];
+		$url 	 = $instance['url'];
 		$icon    = $instance['icon'];
 		$size    = $instance['size'];
 		$align   = $instance['align'];
