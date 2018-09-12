@@ -2,20 +2,20 @@
 /**
  * Icon Widget
  *
- * Icon Widget creates a new WordPress widget that displays a Fontawesome icon,
- * title and description. Select the size, color and text-alignment with easy
- * to use dropdown options.
+ * Icon Widget creates a new WordPress widget that displays an icon,
+ * title and description. Select the size, color and text-alignment
+ * with easy to use dropdown options.
  *
  * @package   Icon_Widget
  * @author    SEO Themes <info@seothemes.com>
  * @license   GPL-2.0+
  * @link      https://seothemes.com
- * @copyright 2017 SEO Themes
+ * @copyright 2018 SEO Themes
  *
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://seothemes.com
  * Description:       Displays an icon widget with a title and description
- * Version:           1.0.9
+ * Version:           1.1.0
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com
  * Text Domain:       icon-widget
@@ -51,6 +51,13 @@ class Icon_Widget extends WP_Widget {
 	protected $widget_slug = 'icon-widget';
 
 	/**
+	 * List of available icon fonts.
+	 *
+	 * @var array
+	 */
+	public static $fonts = array();
+
+	/**
 	 * Constructor
 	 *
 	 * Specifies the classname and description, instantiates the widget,
@@ -58,11 +65,17 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function __construct() {
 
+		// Define available icon fonts.
+		self::$fonts = array(
+			'font-awesome',
+			'line-awesome',
+			'ionicons',
+			'streamline',
+			'et-line',
+		);
+
 		// Load plugin text domain.
-		add_action( 'init', array(
-			$this,
-			'widget_textdomain',
-		) );
+		add_action( 'init', array( $this, 'widget_textdomain' ) );
 
 		parent::__construct(
 			$this->get_widget_slug(),
@@ -289,27 +302,8 @@ class Icon_Widget extends WP_Widget {
 
 		wp_enqueue_style( 'bootstrap-select', plugins_url( 'assets/css/bootstrap-select.min.css', __FILE__ ), array( 'bootstrap' ) );
 
-		// Icon font.
-		$settings = get_option( 'icon_widget_settings' );
-		$font     = $settings['font'];
-
-		if ( 'font-awesome' === $font ) {
-
-			wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
-
-		} elseif ( 'line-awesome' === $font ) {
-
-			wp_enqueue_style( 'line-awesome', plugins_url( 'assets/css/line-awesome.min.css', __FILE__ ) );
-
-		} elseif ( 'ionicons' === $font ) {
-
-			wp_enqueue_style( 'ionicons', plugins_url( 'assets/css/ionicons.min.css', __FILE__ ) );
-
-		} elseif ( 'streamline' === $font ) {
-
-			wp_enqueue_style( 'streamline', plugins_url( 'assets/css/streamline.min.css', __FILE__ ) );
-
-		}
+		// Load icon font CSS.
+		$this->register_widget_styles();
 
 	}
 
@@ -338,29 +332,18 @@ class Icon_Widget extends WP_Widget {
 	 */
 	public function register_widget_styles() {
 
-		$settings = get_option( 'icon_widget_settings' );
-		$font     = $settings['font'];
+		$settings     = get_option( 'icon_widget_settings' );
+		$current_font = $settings['font'];
 
-		if ( 'font-awesome' === $font ) {
+		foreach ( self::$fonts as $font ) {
 
-			wp_enqueue_style( 'font-awesome', plugins_url( 'assets/css/font-awesome.min.css', __FILE__ ) );
+			if ( $font === $current_font ) {
 
-		} elseif ( 'line-awesome' === $font ) {
+				wp_enqueue_style( $font, plugins_url( 'assets/css/' . $font . '.min.css', __FILE__ ) );
 
-			wp_enqueue_style( 'line-awesome', plugins_url( 'assets/css/line-awesome.min.css', __FILE__ ) );
-
-		} elseif ( 'ionicons' === $font ) {
-
-			wp_enqueue_style( 'ionicons', plugins_url( 'assets/css/ionicons.min.css', __FILE__ ) );
-
-		} elseif ( 'streamline' === $font ) {
-
-			wp_enqueue_style( 'streamline', plugins_url( 'assets/css/streamline.min.css', __FILE__ ) );
-
+			}
 		}
-
 	}
-
 }
 
 add_action( 'widgets_init', 'icon_widget_register_widget' );

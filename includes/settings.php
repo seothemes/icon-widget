@@ -62,18 +62,25 @@ function font_render() {
 
 	$options  = get_option( 'icon_widget_settings' );
 	$selected = $options['font'] ? $options['font'] : 'font-awesome';
+	$fonts = Icon_Widget::$fonts;
 
-	?>
-	<select name='icon_widget_settings[font]'>
-		<option value='font-awesome' <?php selected( $selected, 'font-awesome' ); ?>><?php esc_html_e( 'Font Awesome', 'icon-widget' ); ?></option>
-		<option value='line-awesome' <?php selected( $selected, 'line-awesome' ); ?>><?php esc_html_e( 'Line Awesome', 'icon-widget' ); ?></option>
-		<option value='ionicons' <?php selected( $selected, 'ionicons' ); ?>><?php esc_html_e( 'Ionicons', 'icon-widget' ); ?></option>
-		<option value='streamline' <?php selected( $selected, 'streamline' ); ?>><?php esc_html_e( 'Streamline', 'icon-widget' ); ?></option>
-	</select>
+	echo '<select name="icon_widget_settings[font]">';
 
-<?php
+    foreach ( $fonts as $option ) {
+        echo '<option value="' . $option . '" ' . selected( $selected, $option ) . '>' . ucwords( str_replace( '-', ' ', $option ) ) . '</option>';
+    }
+
+	echo '</select>';
 
 }
+
+/**
+ * </option>
+<option value='line-awesome' <?php selected( $selected, 'line-awesome' ); ?>><?php esc_html_e( 'Line Awesome', 'icon-widget' ); ?></option>
+<option value='ionicons' <?php selected( $selected, 'ionicons' ); ?>><?php esc_html_e( 'Ionicons', 'icon-widget' ); ?></option>
+<option value='streamline' <?php selected( $selected, 'streamline' ); ?>><?php esc_html_e( 'Streamline', 'icon-widget' ); ?></option>
+<option value='et-line' <?php selected( $selected, 'et-line' ); ?>><?php esc_html_e( 'ET Line', 'icon-widget' ); ?></option>
+ */
 
 /**
  * Section description.

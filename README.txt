@@ -1,15 +1,15 @@
 === Icon Widget ===
 Contributors: seothemes
-Tags: icon, widget
+Tags: icon, widget, fontawesome
 Donate link: https://seothemes.com
-Requires at least: 4.8.1
-Tested up to: 4.9.1
+Requires at least: 4.9.0
+Tested up to: 4.9.8
 Requires PHP: 5.4
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
-Displays an icon with a title and description
+Display an icon, title and description with a widget or a shortcode
 
 == Description ==
 Icon Widget creates a new WordPress widget that displays an icon, title and description. Select the size, color and text-alignment with easy to use dropdown options.
@@ -19,6 +19,7 @@ Icon Widget creates a new WordPress widget that displays an icon, title and desc
 * Line Awesome
 * Ionicons
 * Streamline Icons
+* ET Line Icons
 *More coming soon. We are open to suggestions.*
 
 = Shortcode Usage =
@@ -60,6 +61,10 @@ The icon font can be changed from **Settings > Icon Widget**.
 Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
+
+= 1.1.0 =
+* Add ET Line icons font.
+* Refactor some reusable code.
 
 = 1.0.9 =
 * Add background color, padding and border radius options.
