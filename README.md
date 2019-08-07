@@ -25,3 +25,11 @@ Icon Widget creates a new WordPress widget that displays an icon, title and desc
 5. Click Install Now to install the WordPress Plugin.
 6. The resulting installation screen will list the installation as successful or note any problems during the install.
 7. If successful, click Activate Plugin to activate it, or Return to Plugin Installer for further actions.
+
+## Contributing
+
+Run the following command to generate a POT file:
+
+```shell
+wp i18n make-pot ./ ./assets/lang/icon-widget.pot
+```

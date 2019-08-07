@@ -35,6 +35,7 @@ class Shortcode extends Service {
 				'classes' => $this->plugin->handle,
 				'title'   => $this->plugin->name,
 				'content' => 'Add a short description.',
+				'link'    => '',
 				'icon'    => apply_filters( 'icon_widget_default_shortcode_icon', 'fa-star' ),
 				'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
 				'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
@@ -53,6 +54,7 @@ class Shortcode extends Service {
 		$classes = $atts['classes'];
 		$title   = $atts['title'];
 		$content = $atts['content'];
+		$link    = $atts['link'];
 		$icon    = $atts['icon'];
 		$size    = $atts['size'];
 		$align   = $atts['align'];
@@ -65,7 +67,9 @@ class Shortcode extends Service {
 
 		// Build HTML.
 		$html = sprintf( '<div class="%s" style="text-align:%s">', $classes, $align );
-		$html .= sprintf( '<i class="far %s fa-%s" style="color:%s;background-color:%s;padding:%spx;border-radius:%spx"> </i>', $icon, $size, $color, $bg, $padding, $radius );
+		$html .= $link ? sprintf( '<a href="%s" %s>', $link, apply_filters( 'icon_widget_link_atts', '' ) ) : '';
+		$html .= sprintf( '<i class="fa %s fa-%s" style="color:%s;background-color:%s;padding:%spx;border-radius:%spx"> </i>', $icon, $size, $color, $bg, $padding, $radius );
+		$html .= $link ? '</a>' : '';
 		$html .= apply_filters( 'icon_widget_line_break', $break );
 		$html .= sprintf( '<%s class="widget-title">%s</%s>', $heading, $title, $heading );
 		$html .= apply_filters( 'icon_widget_wpautop', true ) ? wp_kses_post( wpautop( $content ) ) : wp_kses_post( $content );

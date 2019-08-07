@@ -19,7 +19,9 @@ class Settings extends Service {
 	public function run() {
 		add_action( 'admin_menu', [ $this, 'add_admin_menu' ] );
 		add_action( 'admin_init', [ $this, 'settings_init' ] );
-		add_filter( 'plugin_action_links_' . $this->plugin->handle, [ $this, 'action_links' ] );
+
+		$plugin_file = $this->plugin->handle . DIRECTORY_SEPARATOR . basename( $this->plugin->file );
+		add_filter( 'plugin_action_links_' . $plugin_file, [ $this, 'action_links' ] );
 	}
 
 	/**

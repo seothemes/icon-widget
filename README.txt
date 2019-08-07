@@ -5,7 +5,7 @@ Donate link: https://seothemes.com
 Requires at least: 4.9.0
 Tested up to: 5.2.2
 Requires PHP: 5.4
-Stable tag: 1.2.0
+Stable tag: 1.2.2
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -61,6 +61,13 @@ The icon font can be changed from **Settings > Icon Widget**.
 Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
+
+= 1.2.2 =
+* Fixed broken settings link.
+
+= 1.2.1 =
+* Added link setting.
+* Refactor widget to use shortcode.
 
 = 1.2.0 =
 * Added Font Awesome 5

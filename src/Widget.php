@@ -53,21 +53,31 @@ class Widget extends WP_Widget {
 			$args['widget_id'] = $this->id;
 		}
 
-		echo $args['before_widget'];
+		$html      = $args['before_widget'];
+		$shortcode = '[icon_widget ';
+		$params    = [
+			'title',
+			'content',
+			'link',
+			'icon',
+			'size',
+			'align',
+			'color',
+			'bg',
+			'padding',
+			'radius',
+		];
 
-		printf( '<div class="icon-widget" style="text-align: %s">', esc_attr( $instance['align'] ) );
+		foreach ( $params as $param ) {
+			$value     = isset( $instance[ $param ] ) ? $instance[ $param ] : '';
+			$shortcode .= isset( $instance[ $param ] ) ? "$param='$value' " : '';
+		}
 
-		printf( '<i class="fa %1$s fa-%2$s" style="color:%3$s;background-color:%4$s;padding:%5$spx;border-radius:%6$spx;"> </i>', esc_attr( $instance['icon'] ), esc_attr( $instance['size'] ), esc_attr( $instance['color'] ), esc_attr( $instance['bg'] ), esc_attr( $instance['padding'] ), esc_attr( $instance['radius'] ) );
+		$shortcode .= ']';
+		$html      .= do_shortcode( $shortcode );
+		$html      .= $args['after_widget'];
 
-		echo apply_filters( 'icon_widget_line_break', true ) ? '<br>' : '';
-
-		echo $args['before_title'] . esc_html( $instance['title'] ) . $args['after_title'];
-
-		echo apply_filters( 'icon_widget_wpautop', true ) ? wp_kses_post( wpautop( $instance['content'] ) ) : wp_kses_post( $instance['content'] );
-
-		echo '</div>';
-
-		echo $args['after_widget'];
+		echo $html;
 	}
 
 	/**
@@ -87,6 +97,7 @@ class Widget extends WP_Widget {
 		// Update widget's old values with new incoming values.
 		$instance['title']   = sanitize_text_field( $new_instance['title'] );
 		$instance['content'] = wp_kses_post( $new_instance['content'] );
+		$instance['link']    = esc_url_raw( $new_instance['link'] );
 		$instance['icon']    = sanitize_html_class( $new_instance['icon'] );
 		$instance['size']    = sanitize_html_class( $new_instance['size'] );
 		$instance['align']   = sanitize_html_class( $new_instance['align'] );
@@ -111,6 +122,7 @@ class Widget extends WP_Widget {
 		$defaults = apply_filters( 'icon_widget_defaults', [
 			'title'   => '',
 			'content' => '',
+			'link'    => '',
 			// Keep sub filters for backwards compat.
 			'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
 			'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
@@ -127,6 +139,7 @@ class Widget extends WP_Widget {
 		// Store the values of the widget in their own variable.
 		$title   = $instance['title'];
 		$content = $instance['content'];
+		$link    = $instance['link'];
 		$icon    = $instance['icon'];
 		$size    = $instance['size'];
 		$align   = $instance['align'];

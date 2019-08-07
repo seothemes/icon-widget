@@ -3,26 +3,26 @@
  * Icon Widget
  *
  * Icon Widget creates a new WordPress widget that displays an icon,
- * title and description. Select the size, color and text-alignment
+ * title and description. Select the size, color, text-alignment
  * with easy to use dropdown options.
  *
- * @package   Icon_Widget
+ * @package   SeoThemes\IconWidget
  * @author    SEO Themes <info@seothemes.com>
  * @license   GPL-3.0-or-later
- * @link      https://seothemes.com
+ * @link      https://seothemes.com/
  * @copyright 2019 SEO Themes
  *
  * Plugin Name:       Icon Widget
- * Plugin URI:        https://seothemes.com
+ * Plugin URI:        https://wordpress.org/plugins/icon-widget/
  * Description:       Displays an icon widget with a title and description
- * Version:           1.2.0
+ * Version:           1.2.2
  * Author:            SEO Themes
- * Author URI:        https://seothemes.com
+ * Author URI:        https://seothemes.com/
  * Text Domain:       icon-widget
  * License:           GPL-3.0-or-later
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  * Domain Path:       /languages
- * GitHub Plugin URI: https://github.com/seothemes/icon-widget
+ * GitHub Plugin URI: https://github.com/seothemes/icon-widget/
  */
 
 namespace SeoThemes\IconWidget;
