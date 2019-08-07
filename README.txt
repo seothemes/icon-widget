@@ -3,11 +3,11 @@ Contributors: seothemes
 Tags: icon, widget, fontawesome
 Donate link: https://seothemes.com
 Requires at least: 4.9.0
-Tested up to: 4.9.8
+Tested up to: 5.2.2
 Requires PHP: 5.4
-Stable tag: 1.1.0
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Stable tag: 1.2.0
+License: GPL-3.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
 Display an icon, title and description with a widget or a shortcode
 
@@ -15,7 +15,7 @@ Display an icon, title and description with a widget or a shortcode
 Icon Widget creates a new WordPress widget that displays an icon, title and description. Select the size, color and text-alignment with easy to use dropdown options.
 
 = Icon Fonts Included =
-* Font Awesome
+* Font Awesome 4 & 5
 * Line Awesome
 * Ionicons
 * Streamline Icons
@@ -62,12 +62,16 @@ Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
 
+= 1.2.0 =
+* Added Font Awesome 5
+* Refactored entire plugin.
+
 = 1.1.0 =
-* Add ET Line icons font.
+* Added ET Line icons font.
 * Refactor some reusable code.
 
 = 1.0.9 =
-* Add background color, padding and border radius options.
+* Added background color, padding and border radius options.
 
 = 1.0.8 =
 * Fixed deprecated create_function in PHP7.2

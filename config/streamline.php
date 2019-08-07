@@ -1,11 +1,6 @@
 <?php
-/**
- * Contains an array of Streamline icon glyphs.
- *
- * @package Icon_Widget
- */
 
-$icons = array(
+return [
 	'icon-backpack-streamline-trekking',
 	'icon-bag-shopping-streamline',
 	'icon-barbecue-eat-food-streamline',
@@ -106,4 +101,4 @@ $icons = array(
 	'icon-streamline-suitcase-travel',
 	'icon-pen-streamline-3',
 	'icon-arrow-streamline-target',
-);
+];

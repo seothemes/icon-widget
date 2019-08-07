@@ -1,11 +1,6 @@
 <?php
-/**
- * Contains an array of ET Line icon glyphs.
- *
- * @package Icon_Widget
- */
 
-$icons = array(
+return [
 	'icon-mobile',
 	'icon-laptop',
 	'icon-desktop',
@@ -105,5 +100,5 @@ $icons = array(
 	'icon-rss',
 	'icon-tumblr',
 	'icon-linkedin',
-	'icon-dribbble'
-);
+	'icon-dribbble',
+];

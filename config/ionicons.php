@@ -1,11 +1,6 @@
 <?php
-/**
- * Contains an array of Ionicons glyphs.
- *
- * @package Icon_Widget
- */
 
-$icons = array(
+return [
 	'ion-ionic',
 	'ion-arrow-up-a',
 	'ion-arrow-right-a',
@@ -736,4 +731,4 @@ $icons = array(
 	'ion-social-yen-outline',
 	'ion-social-euro',
 	'ion-social-euro-outline',
-);
+];

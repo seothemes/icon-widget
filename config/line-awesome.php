@@ -1,11 +1,6 @@
 <?php
-/**
- * Contains an array of Line Awesome glyphs.
- *
- * @package Icon_Widget
- */
 
-$icons = array(
+return [
 	'fa-glass',
 	'fa-music',
 	'fa-search',
@@ -591,4 +586,4 @@ $icons = array(
 	'fa-vimeo',
 	'fa-black-tie',
 	'fa-fonticons',
-);
+];
