@@ -70,7 +70,7 @@ class Widget extends WP_Widget {
 
 		foreach ( $params as $param ) {
 			$value     = isset( $instance[ $param ] ) ? $instance[ $param ] : '';
-			$shortcode .= isset( $instance[ $param ] ) ? "$param='$value' " : '';
+			$shortcode .= $value ? sprintf( '%s="%s" ', $param, $value ) : '';
 		}
 
 		$shortcode .= ']';
