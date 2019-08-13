@@ -43,13 +43,8 @@
 	</p>
 
 	<?php
-
-	$settings = get_option( 'icon_widget_settings' );
-	$font     = $settings['font'];
-
-	// Load the array of icon glyphs.
-	$icons = require $this->plugin->dir . 'config/' . $font . '.php';
-
+	$settings = get_option( 'icon_widget_settings', 'font-awesome-5' );
+	$icons    = require $this->plugin->dir . 'config/' . $settings['font'] . '.php';
 	?>
 
 	<script type="text/javascript">

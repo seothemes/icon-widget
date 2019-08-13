@@ -62,6 +62,13 @@ Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
 
+= 1.2.4 =
+* Fixed default font family in admin widget view.
+* Fixed quotes issue in widget.
+
+= 1.2.3 =
+* Fixed quotation marks bug.
+
 = 1.2.2 =
 * Fixed broken settings link.
 
