@@ -43,7 +43,7 @@
 	</p>
 
 	<?php
-	$settings = get_option( 'icon_widget_settings', 'font-awesome-5' );
+	$settings = get_option( 'icon_widget_settings', [ 'font' => 'font-awesome-5' ] );
 	$icons    = require $this->plugin->dir . 'config/' . $settings['font'] . '.php';
 	?>
 

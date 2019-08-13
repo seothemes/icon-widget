@@ -5,7 +5,7 @@ Donate link: https://seothemes.com
 Requires at least: 4.9.0
 Tested up to: 5.2.2
 Requires PHP: 5.4
-Stable tag: 1.2.3
+Stable tag: trunk
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
