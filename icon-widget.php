@@ -14,8 +14,8 @@
  *
  * Plugin Name:       Icon Widget
  * Plugin URI:        https://wordpress.org/plugins/icon-widget/
- * Description:       Displays an icon widget with a title and description
- * Version:           1.2.4
+ * Description:       Displays an icon widget with a title and description.
+ * Version:           1.2.5
  * Author:            SEO Themes
  * Author URI:        https://seothemes.com/
  * Text Domain:       icon-widget

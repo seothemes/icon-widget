@@ -9,7 +9,7 @@ Stable tag: trunk
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
-Display an icon, title and description with a widget or a shortcode
+Display an icon, title and description with a widget or a shortcode.
 
 == Description ==
 Icon Widget creates a new WordPress widget that displays an icon, title and description. Select the size, color and text-alignment with easy to use dropdown options.
@@ -61,6 +61,9 @@ The icon font can be changed from **Settings > Icon Widget**.
 Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
+
+= 1.2.5 =
+* Fixed escaping quotes issue in widget content.
 
 = 1.2.4 =
 * Fixed default font family in admin widget view.

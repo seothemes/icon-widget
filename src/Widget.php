@@ -69,8 +69,8 @@ class Widget extends WP_Widget {
 		];
 
 		foreach ( $params as $param ) {
-			$value     = isset( $instance[ $param ] ) ? $instance[ $param ] : '';
-			$shortcode .= $value ? $param . '="' . htmlentities( $value ) . '" ' : '';
+			$value = isset( $instance[ $param ] ) ? $instance[ $param ] : '';
+			$shortcode .= $value ? $param . '="' . str_replace('"','\'', addslashes( $value ) ) . '" ' : '';
 		}
 
 		$shortcode .= ']';
