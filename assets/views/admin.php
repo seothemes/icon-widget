@@ -97,6 +97,10 @@
 
 			<?php endfor; ?>
 
+			<option value='default' <?php echo ( 'default' === $weight ) ? 'selected' : ''; ?>>
+				<?php esc_attr_e( 'Default', 'icon-widget' ); ?>
+			</option>
+
 		</select>
 	</p>
 

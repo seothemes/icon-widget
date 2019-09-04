@@ -124,7 +124,7 @@ class Widget extends \WP_Widget {
 			'content' => '',
 			'link'    => '',
 			'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
-			'weight'  => '600',
+			'weight'  => 'default',
 			'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
 			'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
 			'color'   => apply_filters( 'icon_widget_default_color', '#333333' ),

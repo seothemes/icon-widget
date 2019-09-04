@@ -37,7 +37,7 @@ class Shortcode extends Service {
 				'content' => 'Add a short description.',
 				'link'    => '',
 				'icon'    => apply_filters( 'icon_widget_default_shortcode_icon', 'fa-star' ),
-				'weight'  => '600',
+				'weight'  => 'default',
 				'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
 				'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
 				'color'   => apply_filters( 'icon_widget_default_color', '#333333' ),
@@ -57,20 +57,20 @@ class Shortcode extends Service {
 		$content = $atts['content'];
 		$link    = $atts['link'];
 		$icon    = $atts['icon'];
-		$weight  = $atts['weight'];
 		$size    = $atts['size'];
 		$align   = $atts['align'];
-		$color   = $atts['color'];
 		$heading = $atts['heading'];
 		$break   = $atts['break'];
-		$bg      = $atts['bg'];
-		$padding = $atts['padding'];
-		$radius  = $atts['radius'];
+		$weight  = 'default' !== $atts['weight'] ? 'font-weight:' . $atts['weight'] . ';' : '';
+		$color   = $atts['color'] ? 'color:' . $atts['color'] . ';' : '';
+		$bg      = $atts['bg'] ? 'background-color:' . $atts['bg'] . ';' : 'background-color:transparent;';
+		$padding = $atts['padding'] ? 'padding:' . $atts['padding'] . 'px;' : '';
+		$radius  = $atts['radius'] ? 'border-radius:' . $atts['radius'] . 'px;' : '';
 
 		// Build HTML.
 		$html = sprintf( '<div class="%s" style="text-align:%s">', $classes, $align );
 		$html .= $link ? sprintf( '<a href="%s" %s>', $link, apply_filters( 'icon_widget_link_atts', '' ) ) : '';
-		$html .= sprintf( '<i class="fa %s fa-%s" style="font-weight:%s;color:%s;background-color:%s;padding:%spx;border-radius:%spx"> </i>', $icon, $size, $weight, $color, $bg, $padding, $radius );
+		$html .= sprintf( '<i class="fa %s fa-%s" style="%s%s%s%s%s"> </i>', $icon, $size, $weight, $color, $bg, $padding, $radius );
 		$html .= $link ? '</a>' : '';
 		$html .= apply_filters( 'icon_widget_line_break', $break );
 		$html .= sprintf( '<%s class="widget-title">%s</%s>', $heading, $title, $heading );
