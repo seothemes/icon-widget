@@ -4,7 +4,7 @@ Tags: icon, widget, fontawesome
 Donate link: https://seothemes.com
 Requires at least: 4.9.0
 Tested up to: 5.2.2
-Requires PHP: 5.4
+Requires PHP: 5.6
 Stable tag: trunk
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -29,6 +29,7 @@ Since 1.0.6 you can now use the `icon_widget` shortcode. Below is a list of avai
 * title    =>  'Icon Widget'
 * content  =>  'Add a short description.'
 * icon     =>  'fa-star'
+* weight   =>  '600'
 * size     =>  '2x'
 * align    =>  'center'
 * color    =>  '#333333'
@@ -38,10 +39,9 @@ Since 1.0.6 you can now use the `icon_widget` shortcode. Below is a list of avai
 * heading  =>  'h4'
 * break    =>  '`<br>`'
 
-
 Here is an example of the icon widget shortcode using all available parameters:
 
-`[icon_widget classes="icon-widget" title="Icon Widget" content="Add a short description" icon="fa-star" size="2x" align="center" color="#fff" bg="#333" padding="30" radius="30" heading="h4" break="<br>"]`
+`[icon_widget classes="icon-widget" title="Icon Widget" content="Add a short description" icon="fa-star" weight="600" size="2x" align="center" color="#fff" bg="#333" padding="30" radius="30" heading="h4" break="<br>"]`
 
 == Installation ==
 1. Go to Plugins > Add New.
@@ -54,6 +54,9 @@ Here is an example of the icon widget shortcode using all available parameters:
 
 == Frequently Asked Questions ==
 
+= Can you add an Icon block? =
+Yes, we are working on it! In the meantime, the `[icon_widget]` shortcode can be used in the Shortcode Block.
+
 = How do I change the icon font? =
 The icon font can be changed from **Settings > Icon Widget**.
 
@@ -61,6 +64,10 @@ The icon font can be changed from **Settings > Icon Widget**.
 Yes, we will add additional icon fonts upon request.
 
 == Changelog ==
+
+= 1.2.6 =
+* Added font weight setting
+* Refactor loops in admin widget view
 
 = 1.2.5 =
 * Fixed escaping quotes issue in widget content.

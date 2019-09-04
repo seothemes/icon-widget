@@ -2,14 +2,12 @@
 
 namespace SeoThemes\IconWidget;
 
-use WP_Widget;
-
 /**
  * Class Widget
  *
  * @package SeoThemes\IconWidget
  */
-class Widget extends WP_Widget {
+class Widget extends \WP_Widget {
 
 	/**
 	 * @var Plugin
@@ -60,6 +58,7 @@ class Widget extends WP_Widget {
 			'content',
 			'link',
 			'icon',
+			'weight',
 			'size',
 			'align',
 			'color',
@@ -69,8 +68,8 @@ class Widget extends WP_Widget {
 		];
 
 		foreach ( $params as $param ) {
-			$value = isset( $instance[ $param ] ) ? $instance[ $param ] : '';
-			$shortcode .= $value ? $param . '="' . str_replace('"','\'', addslashes( $value ) ) . '" ' : '';
+			$value     = isset( $instance[ $param ] ) ? $instance[ $param ] : '';
+			$shortcode .= $value ? $param . '="' . str_replace( '"', '\'', addslashes( $value ) ) . '" ' : '';
 		}
 
 		$shortcode .= ']';
@@ -99,6 +98,7 @@ class Widget extends WP_Widget {
 		$instance['content'] = wp_kses_post( $new_instance['content'] );
 		$instance['link']    = esc_url_raw( $new_instance['link'] );
 		$instance['icon']    = sanitize_html_class( $new_instance['icon'] );
+		$instance['weight']  = sanitize_html_class( $new_instance['weight'] );
 		$instance['size']    = sanitize_html_class( $new_instance['size'] );
 		$instance['align']   = sanitize_html_class( $new_instance['align'] );
 		$instance['color']   = sanitize_hex_color( $new_instance['color'] );
@@ -123,8 +123,8 @@ class Widget extends WP_Widget {
 			'title'   => '',
 			'content' => '',
 			'link'    => '',
-			// Keep sub filters for backwards compat.
 			'icon'    => apply_filters( 'icon_widget_default_icon', '\f000' ),
+			'weight'  => '600',
 			'size'    => apply_filters( 'icon_widget_default_size', '2x' ),
 			'align'   => apply_filters( 'icon_widget_default_align', 'left' ),
 			'color'   => apply_filters( 'icon_widget_default_color', '#333333' ),
@@ -141,6 +141,7 @@ class Widget extends WP_Widget {
 		$content = $instance['content'];
 		$link    = $instance['link'];
 		$icon    = $instance['icon'];
+		$weight  = $instance['weight'];
 		$size    = $instance['size'];
 		$align   = $instance['align'];
 		$color   = $instance['color'];

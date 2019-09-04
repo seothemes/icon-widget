@@ -80,6 +80,31 @@
 	</p>
 
 	<p>
+		<label for="<?php echo esc_attr( $this->get_field_id( 'weight' ) ); ?>">
+			<?php esc_html_e( 'Weight:', 'icon-widget' ); ?>
+		</label>
+		<br/>
+		<select class='widefat'
+		        id="<?php echo esc_attr( $this->get_field_id( 'weight' ) ); ?>"
+		        name="<?php echo esc_attr( $this->get_field_name( 'weight' ) ); ?>"
+		        type="text">
+
+			<?php for ( $i = 1; $i < 10; $i++ ) : ?>
+
+				<option value='<?php echo "{$i}00"; ?>' <?php echo ( "{$i}00" === $weight ) ? 'selected' : ''; ?>>
+					<?php echo "{$i}00"; ?>
+				</option>
+
+			<?php endfor; ?>
+
+		</select>
+	</p>
+
+	<?php
+	$scales = [ 'xs', 'sm', 'lg', '2x', '3x', '5x', '7x', '10x' ];
+	?>
+
+	<p>
 		<label for="<?php echo esc_attr( $this->get_field_id( 'size' ) ); ?>">
 			<?php esc_html_e( 'Size:', 'icon-widget' ); ?>
 		</label>
@@ -89,24 +114,18 @@
 		        name="<?php echo esc_attr( $this->get_field_name( 'size' ) ); ?>"
 		        type="text">
 
-			<option value='lg' <?php echo ( 'lg' === $size ) ? 'selected' : ''; ?>>
-				lg
-			</option>
-			<option value='2x' <?php echo ( '2x' === $size ) ? 'selected' : ''; ?>>
-				2x
-			</option>
-			<option value='3x' <?php echo ( '3x' === $size ) ? 'selected' : ''; ?>>
-				3x
-			</option>
-			<option value='4x' <?php echo ( '4x' === $size ) ? 'selected' : ''; ?>>
-				4x
-			</option>
-			<option value='5x' <?php echo ( '5x' === $size ) ? 'selected' : ''; ?>>
-				5x
-			</option>
+			<?php foreach ( $scales as $scale ) : ?>
+
+				<option value='<?php echo $scale; ?>' <?php echo ( $scale === $size ) ? 'selected' : ''; ?>>
+					<?php echo $scale; ?>
+				</option>
+
+			<?php endforeach; ?>
 
 		</select>
 	</p>
+
+	<?php $alignments = [ 'left', 'center', 'right' ]; ?>
 
 	<p>
 		<label for="<?php echo esc_attr( $this->get_field_id( 'align' ) ); ?>">
@@ -118,15 +137,13 @@
 		        name="<?php echo esc_attr( $this->get_field_name( 'align' ) ); ?>"
 		        type="text">
 
-			<option value='left' <?php echo ( 'left' === $align ) ? 'selected' : ''; ?>>
-				<?php esc_html_e( 'Left', 'icon-widget' ); ?>
-			</option>
-			<option value='center' <?php echo ( 'center' === $align ) ? 'selected' : ''; ?>>
-				<?php esc_html_e( 'Center', 'icon-widget' ); ?>
-			</option>
-			<option value='right' <?php echo ( 'right' === $align ) ? 'selected' : ''; ?>>
-				<?php esc_html_e( 'Right', 'icon-widget' ); ?>
-			</option>
+			<?php foreach ( $alignments as $alignment ) : ?>
+
+				<option value='<?php echo $alignment; ?>' <?php echo ( $alignment === $align ) ? 'selected' : ''; ?>>
+					<?php echo ucwords( $alignment ); ?>
+				</option>
+
+			<?php endforeach; ?>
 
 		</select>
 	</p>
