@@ -82,7 +82,7 @@ class Enqueue extends Service {
 	 */
 	public function load_icon_font() {
 		$settings     = get_option( 'icon_widget_settings' );
-		$current_font = $settings['font'];
+		$current_font = $settings['font'] ?? '';
 
 		foreach ( Utils::get_fonts() as $font ) {
 			if ( $font === $current_font ) {

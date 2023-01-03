@@ -1,0 +1,10 @@
+{
+  "name": "icon-widget",
+  "description": "Icon widget WordPress plugin",
+  "author": "SEO Themes",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "pot": "wp i18n make-pot ./ languages/icon-widget.pot --exclude='wp,wp-content,vendor,tests,node_modules,build,assets,src'",
+    "zip": "rm -Rf ../../icon-widget.zip && zip -r ../../icon-widget.zip assets/ config/ languages/ src/ icon-widget.php readme.txt"
+  }
+}

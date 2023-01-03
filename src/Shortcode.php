@@ -51,21 +51,20 @@ class Shortcode extends Service {
 			'icon_widget'
 		);
 
-		// Store variables.
-		$classes = $atts['classes'];
-		$title   = $atts['title'];
-		$content = $atts['content'];
-		$link    = $atts['link'];
-		$icon    = $atts['icon'];
-		$size    = $atts['size'];
-		$align   = $atts['align'];
-		$heading = $atts['heading'];
-		$break   = $atts['break'];
-		$weight  = 'default' !== $atts['weight'] ? 'font-weight:' . $atts['weight'] . ';' : '';
-		$color   = $atts['color'] ? 'color:' . $atts['color'] . ';' : '';
-		$bg      = $atts['bg'] ? 'background-color:' . $atts['bg'] . ';' : 'background-color:transparent;';
-		$padding = $atts['padding'] ? 'padding:' . $atts['padding'] . 'px;' : '';
-		$radius  = $atts['radius'] ? 'border-radius:' . $atts['radius'] . 'px;' : '';
+		$classes = \esc_attr( $atts['classes'] );
+		$title   = \esc_attr( $atts['title'] );
+		$content = \wp_kses_post( $atts['content'] );
+		$link    = \esc_url( $atts['link'] );
+		$icon    = \esc_attr( $atts['icon'] );
+		$size    = \esc_attr( $atts['size'] );
+		$align   = \esc_attr( $atts['align'] );
+		$heading = \esc_attr( $atts['heading'] );
+		$break   = \wp_kses_post($atts['break']);
+		$weight  = 'default' !== $atts['weight'] ? 'font-weight:' . \esc_attr( $atts['weight'] ) . ';' : '';
+		$color   = $atts['color'] ? 'color:' . \esc_attr( $atts['color'] ) . ';' : '';
+		$bg      = $atts['bg'] ? 'background-color:' . \esc_attr( $atts['bg'] ) . ';' : 'background-color:transparent;';
+		$padding = $atts['padding'] ? 'padding:' . \esc_attr( $atts['padding'] ) . 'px;' : '';
+		$radius  = $atts['radius'] ? 'border-radius:' . \esc_attr( $atts['radius'] ) . 'px;' : '';
 
 		// Build HTML.
 		$html = sprintf( '<div class="%s" style="text-align:%s">', $classes, $align );

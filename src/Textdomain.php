@@ -28,6 +28,6 @@ class Textdomain extends Service {
 	 * @return void
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( $this->plugin->handle, false, $this->plugin->dir . 'assets/lang/' );
+		load_plugin_textdomain( $this->plugin->handle, false, $this->plugin->dir . 'languages' );
 	}
 }

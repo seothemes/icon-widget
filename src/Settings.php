@@ -76,7 +76,7 @@ class Settings extends Service {
 	 */
 	public function render_fonts() {
 		$options  = get_option( 'icon_widget_settings' );
-		$selected = $options['font'] ? $options['font'] : 'font-awesome-5';
+		$selected = $options['font'] ?? 'font-awesome-5';
 		$fonts    = Utils::get_fonts();
 
 		echo '<select name="icon_widget_settings[font]">';
